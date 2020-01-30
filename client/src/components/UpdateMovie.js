@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const UpdateMovie = props => {
-  const [updateMovie, setUpdateMovie] = useState({
+  const [updatedMovie, setUpdatedMovie] = useState({
     id: 0,
     title: "",
     director: "",
@@ -19,47 +19,47 @@ const UpdateMovie = props => {
       return `${movie.id}` === movieID;
     });
     console.log(movieToUpdate);
-    setUpdateMovie(movieToUpdate);
+    setUpdatedMovie(movieToUpdate);
   }, [match, movies]);
 
   const handleSubmit = e => {
     e.preventDefault();
     axios 
-      .put(`http://localhost:5000/api/movies/${updateMovie.id}`, UpdateMovie)
-      .then(res => props.history.push(`/movies/${UpdateMovie.id}`))
+      .put(`http://localhost:5000/api/movies/${updatedMovie.id}`, updatedMovie)
+      .then(res => props.history.push(`/movies/${updatedMovie.id}`))
       .catch(err => console.log(err))
   };
 
   const changeHandler = e => {
-    setUpdateMovie({ ...updateMovie, [e.target.name]: e.target.value });
+    setUpdatedMovie({ ...updatedMovie, [e.target.name]: e.target.value });
   };
 
   return(
     <form onSubmit={handleSubmit}>
-      <label for="title">
+      <label htmlFor="title">
         Title
         <input
         type="text"
         name="title"
-        value={updateMovie.title}
+        value={updatedMovie.title}
         onChange={changeHandler}
       />
       </label>
-      <label for="director">
+      <label htmlFor="director">
         Director
         <input
         type="text"
         name="director"
-        value={updateMovie.director}
+        value={updatedMovie.director}
         onChange={changeHandler}
       />
       </label>
-      <label for="metascore">
+      <label htmlFor="metascore">
         MetaScore
         <input
         type="text"
         name="metascore"
-        value={updateMovie.metascore}
+        value={updatedMovie.metascore}
         onChange={changeHandler}
       />
       </label>
