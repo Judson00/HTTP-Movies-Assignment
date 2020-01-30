@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'
 import axios from "axios";
 
-const UpdateMovie = props => {
-  const [updatedMovie, setUpdatedMovie] = useState({
-    id: 0,
+const initialMovie = {
+  id: 0,
     title: "",
     director: "",
     metascore: 0,
     stars: []
-  })
+}
 
+const UpdateMovie = props => {
+  const [updatedMovie, setUpdatedMovie] = useState(initialMovie)
+  const {id} = useParams();
+
+  console.log("This is props from Update Movie line 13: ", props)
   const { match, movies } = props;
 
+  console.log("Movies from UpdateMovie line 15", movies)
+
   useEffect(() => {
-    const movieID = match.params.id;
+    console.log("Movies from Update Movie useEffect line 23", movies)
+
     const movieToUpdate = movies.find(movie => {
-      console.log(`${movie.id}`, movieID);
-      return `${movie.id}` === movieID;
+      console.log(`${movie.id}`, id);
+      return `${movie.id}` === id;
     });
     console.log(movieToUpdate);
     setUpdatedMovie(movieToUpdate);
-  }, [match, movies]);
+  }, [movies, id]);
 
   const handleSubmit = e => {
     e.preventDefault();
