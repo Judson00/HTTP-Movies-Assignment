@@ -3,14 +3,19 @@ import { Route } from "react-router-dom";
 import SavedList from "./components/SavedList";
 import MovieList from "./components/MovieList";
 import Movie from "./components/Movie";
-import UpdateMovie from "./components/UpdateMovie";
+import UpdateMovie from './components/UpdateMovie';
 
-const App = () => {
+const App = props => {
   const [savedList, setSavedList] = useState([]);
+  const [movies, setUpdatedMovie] = useState([]);
 
   const addToSavedList = movie => {
     setSavedList([...savedList, movie]);
   };
+
+  const getMovies = payload => {
+    setUpdatedMovie(payload);
+  }
 
   return (
     <>
@@ -22,7 +27,8 @@ const App = () => {
           return <Movie {...props} addToSavedList={addToSavedList} />;
         }}
       />
-      <Route path="/update-movie/:id" component={UpdateMovie} />
+      <Route path="/update-movie/:id" render={props => <UpdateMovie{...props} movies={movies} />} 
+      />
     </>
   );
 };
