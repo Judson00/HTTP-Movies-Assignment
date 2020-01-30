@@ -34,6 +34,8 @@ const UpdateMovie = props => {
     setUpdatedMovie({ ...updatedMovie, [e.target.name]: e.target.value });
   };
 
+  console.log("updatedMovie: " + updatedMovie);
+
   return(
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">

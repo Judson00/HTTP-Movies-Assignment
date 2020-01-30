@@ -7,14 +7,14 @@ import UpdateMovie from './components/UpdateMovie';
 
 const App = props => {
   const [savedList, setSavedList] = useState([]);
-  const [movies, setUpdatedMovie] = useState([]);
+  const [movies, setUpdatedMovies] = useState([]);
 
   const addToSavedList = movie => {
     setSavedList([...savedList, movie]);
   };
 
   const getMovies = payload => {
-    setUpdatedMovie(payload);
+    setUpdatedMovies(payload);
   }
 
   return (
